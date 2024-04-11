@@ -1,0 +1,6 @@
+res://Character/Scene/character.tscn
+res://Scene/Main.gdshader
+res://Scripts/Character/character.gd
+res://Scene/Main.tscn
+res://Scripts/Camroot.gd
+res://Scene/camroot.tscn
