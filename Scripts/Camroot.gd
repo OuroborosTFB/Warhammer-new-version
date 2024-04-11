@@ -23,7 +23,7 @@ func _physics_process(delta):
 	
 	var mesh_front = $"../Hades_Armature".global_transform.basis.z
 	var rot_speed_multiplier = 0.10 #reduce this to make the rotation radius larger
-	var auto_rotate_speed =  ((PI - mesh_front.angle_to($h.global_transform.basis.z)) * get_parent().velocity.length() * rot_speed_multiplier)
+	var _auto_rotate_speed =  ((PI - mesh_front.angle_to($h.global_transform.basis.z)) * get_parent().velocity.length() * rot_speed_multiplier)
 
 	$h.rotation_degrees.y = lerp(float($h.rotation_degrees.y), camrot_h, delta * h_acceleration)
 	

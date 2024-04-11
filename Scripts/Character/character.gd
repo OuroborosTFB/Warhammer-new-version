@@ -1,5 +1,12 @@
 extends CharacterBody3D
 
+@onready var left_leg = $LeftTarget
+@onready var right_leg = $RightTarget
+@onready var left_raycast = $LeftRay
+@onready var right_raycast = $RightRay
+@onready var no_raycast_pos_left = $LeftStepTarget
+@onready var no_raycast_pos_right = $RightStepTarget
+
 var direction = Vector3.BACK
 var strafe_dir = Vector3.ZERO
 var strafe = Vector3.ZERO
@@ -16,11 +23,15 @@ var angular_acceleration = 7
 
 func _ready():
 	direction = Vector3.BACK.rotated(Vector3.UP, $Camroot/h.global_transform.basis.get_euler().y)
-	$Hades_Armature.look_at($"Camroot".global_transform.origin, Vector3.UP)
-	
+
+func update_ik_target_pos(target, raycast, no_raycast_position, foot_height_offset):
+	if raycast.is_colliding():
+		var hit_point = raycast.get_collision_point().y + foot_height_offset
+		target.global_transform.origin.y = hit_point
+	else:
+		target.global_transform.origin.y = no_raycast_position.global_transform.origin.y
 
 func _input(event):
-	
 	if event is InputEventKey:
 		var node_name = "Status/" + event.as_text()
 		if has_node(node_name):
@@ -35,6 +46,8 @@ func _input(event):
 
 func _physics_process(delta):
 	
+	update_ik_target_pos(left_leg, left_raycast, no_raycast_pos_left, 0.05)
+	update_ik_target_pos(right_leg, right_raycast, no_raycast_pos_right, 0.05)
 	apply_gravity(delta)
 	
 	if is_moving():
@@ -43,9 +56,9 @@ func _physics_process(delta):
 	else:
 		stop_move(delta)
 		
-	move_and_slide()
 	animate_blend_space_2d()
 	velocity = lerp(velocity, direction * movement_speed, delta * acceleration)
+	move_and_slide()
 
 func stop_move(delta):
 	$AnimationTree.set("parameters/iwr_blend/blend_amount", lerp($AnimationTree.get("parameters/iwr_blend/blend_amount"), -1.0, delta * acceleration))

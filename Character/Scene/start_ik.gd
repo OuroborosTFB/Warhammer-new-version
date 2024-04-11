@@ -1,5 +1,6 @@
 @tool
-extends Marker3D
+
+extends SkeletonIK3D
 
 func _ready():
 	start()
