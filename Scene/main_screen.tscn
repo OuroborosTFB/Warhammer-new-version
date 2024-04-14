@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://buq8kxim218ak"]
+
+[ext_resource type="Theme" uid="uid://bxp0kjg5seq0h" path="res://src/Theme/UI_theme.tres" id="1_j6geb"]
+[ext_resource type="PackedScene" uid="uid://cu4t58thyh0b" path="res://src/Buttons/Scenes/change_scene_button.tscn" id="2_y3h87"]
+[ext_resource type="PackedScene" uid="uid://byh7a30i6nfrf" path="res://src/Buttons/Scenes/quit_button.tscn" id="4_ooucq"]
+
+[node name="MainScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_j6geb")
+
+[node name="Menu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -145.0
+offset_right = 224.0
+offset_bottom = 153.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="StartButton" parent="Menu" instance=ExtResource("2_y3h87")]
+layout_mode = 2
+text = "Play
+"
+next_scene = "res://Scene/LevelTemplate.tscn"
+
+[node name="QuitButton" parent="Menu" instance=ExtResource("4_ooucq")]
+layout_mode = 2
+text = "Exit Game"

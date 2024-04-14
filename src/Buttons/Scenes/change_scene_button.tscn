@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cu4t58thyh0b"]
+
+[ext_resource type="Script" path="res://Scripts/Buttons/start_button.gd" id="1_cin12"]
+
+[node name="ChangeSceneButton" type="Button"]
+text = "Начать игру"
+script = ExtResource("1_cin12")
+
+[connection signal="button_up" from="." to="." method="_on_button_up"]

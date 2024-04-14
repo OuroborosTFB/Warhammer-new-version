@@ -13,27 +13,20 @@ var strafe = Vector3.ZERO
 
 var sprinting = false
 
-var gravity = 100
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-var movement_speed = 0
-var walk_speed = 10
+var walk_speed = 1.75
 var run_speed = walk_speed * 2
 var acceleration = 6
-var angular_acceleration = 7
+var movement_speed = 0.0
 
-func _ready():
-	direction = Vector3.BACK.rotated(Vector3.UP, $Camroot/h.global_transform.basis.get_euler().y)
-
-func update_ik_target_pos(target, raycast, no_raycast_position, foot_height_offset):
-	if raycast.is_colliding():
-		var hit_point = raycast.get_collision_point().y + foot_height_offset
-		target.global_transform.origin.y = hit_point
-	else:
-		target.global_transform.origin.y = no_raycast_position.global_transform.origin.y
+var ray_origin = Vector3()
+var ray_target = Vector3()
+var angular_acceleration = 0.5
 
 func _input(event):
 	if event is InputEventKey:
-		var node_name = "Status/" + event.as_text()
+		var node_name = "UI/" + event.as_text()
 		if has_node(node_name):
 			if event.is_pressed():
 				get_node(node_name).color = Color("ff6666")
@@ -46,59 +39,69 @@ func _input(event):
 
 func _physics_process(delta):
 	
-	update_ik_target_pos(left_leg, left_raycast, no_raycast_pos_left, 0.05)
-	update_ik_target_pos(right_leg, right_raycast, no_raycast_pos_right, 0.05)
 	apply_gravity(delta)
 	
 	if is_moving():
 		move(delta)
-		rotate_char(delta)
+		rotate_char()
 	else:
 		stop_move(delta)
+		rotate_char()
 		
 	animate_blend_space_2d()
-	velocity = lerp(velocity, direction * movement_speed, delta * acceleration)
 	move_and_slide()
 
 func stop_move(delta):
 	$AnimationTree.set("parameters/iwr_blend/blend_amount", lerp($AnimationTree.get("parameters/iwr_blend/blend_amount"), -1.0, delta * acceleration))
-	movement_speed = 0
+	movement_speed = 0.0
+	direction = 0
 	strafe_dir = Vector3.ZERO
 	strafe = Vector3.ZERO
+	if is_on_floor():
+		velocity = Vector3.ZERO
 
 func is_moving():
 	return Input.is_action_pressed("forward") || Input.is_action_pressed("backward") || Input.is_action_pressed("left") || Input.is_action_pressed("right")
 
 func apply_gravity(delta):
 	if not is_on_floor():
-		velocity.y -= gravity * delta
-		move_and_slide()
+		velocity.y -= gravity * delta		
+	move_and_slide()
 
 func move(delta):
-	var h_rot = $"Camroot/h".global_transform.basis.get_euler().y
-		
-	direction = Vector3(Input.get_action_strength("left") - Input.get_action_strength("right"),
-	0,
-	Input.get_action_strength("forward") - Input.get_action_strength("backward")).normalized()
-		
-	strafe_dir = direction
-	
+	var input_dir = Input.get_vector("left", "right", "forward", "backward")
+	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+
 	if Input.is_action_just_pressed("sprint"):
 		sprinting = not sprinting
-	
-	direction = direction.rotated(Vector3.UP, h_rot).normalized()
-	strafe = lerp(strafe, strafe_dir, delta * acceleration)
-	if sprinting:
-			movement_speed = run_speed
-			$AnimationTree.set("parameters/iwr_blend/blend_amount", lerp($AnimationTree.get("parameters/iwr_blend/blend_amount"), 1.0, delta * acceleration))
-			$AnimationTree.set("parameters/Run/blend_position", Vector2(-strafe.x, strafe.z))
-	else:
-			movement_speed = walk_speed
-			$AnimationTree.set("parameters/iwr_blend/blend_amount", lerp($AnimationTree.get("parameters/iwr_blend/blend_amount"), 0.0, delta * acceleration))
-			$AnimationTree.set("parameters/Walk/blend_position", Vector2(-strafe.x, strafe.z))
 
-func rotate_char(delta):
-	$Hades_Armature.rotation.y = lerp_angle($Hades_Armature.rotation.y, $Camroot/h.rotation.y, delta * angular_acceleration)
+	var speed = run_speed if sprinting else walk_speed
+	var blend_position ="parameters/Run/blend_position" if sprinting else "parameters/Walk/blend_position"
+
+	velocity.x = direction.x * speed
+	velocity.z = direction.z * speed
+
+	$AnimationTree.set("parameters/iwr_blend/blend_amount", lerp($AnimationTree.get("parameters/iwr_blend/blend_amount"), 1.0 if sprinting else 0.0, delta * acceleration))
+	$AnimationTree.set(blend_position, input_dir)
+
+	move_and_slide()
+
+func rotate_char():
+	var mouse_position = get_viewport().get_mouse_position()
+	
+	ray_origin = $"../Camroot/h/v/Camera3D".project_ray_origin(mouse_position)
+	
+	ray_target = ray_origin + $"../Camroot/h/v/Camera3D".project_ray_normal(mouse_position) * 2100.0
+	
+	var space_state = get_world_3d().direct_space_state
+	var ray_query: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(ray_origin, ray_target)
+	var intersection = space_state.intersect_ray(ray_query)
+	
+	if not intersection.is_empty():
+		var pos = intersection.position
+		var look_at_me = Vector3(pos.x, position.y, pos.z)
+		look_at(look_at_me, Vector3.UP)
+		var target_direction = look_at_me - global_transform.origin
 
 func animate_blend_space_2d():
 	var iw_blend = (velocity.length() - walk_speed) / walk_speed

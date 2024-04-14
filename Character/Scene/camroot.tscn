@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://p3ieugjg8clp"]
+
+[ext_resource type="Script" path="res://Scripts/Character/Camroot.gd" id="1_jtnqr"]
+[ext_resource type="Shader" path="res://src/Shaders/Main.gdshader" id="2_niyfu"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_bow8b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jdde8"]
+render_priority = 0
+shader = ExtResource("2_niyfu")
+shader_parameter/zNear = 2.0
+shader_parameter/zFar = 10.0
+shader_parameter/width = 1.0
+shader_parameter/addDepth = false
+
+[node name="Camroot" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.42269, 0, 0)
+script = ExtResource("1_jtnqr")
+h_acceleration = 3.0
+v_acceleration = 2.0
+
+[node name="h" type="Node3D" parent="."]
+
+[node name="v" type="Node3D" parent="h"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0309, 0)
+
+[node name="Camera3D" type="Camera3D" parent="h/v"]
+transform = Transform3D(-1, -7.10543e-14, -8.74228e-08, -6.23629e-08, 0.70081, 0.713348, 6.12667e-08, 0.713348, -0.70081, 0, 19.223, -14.6607)
+current = true
+fov = 37.8493
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="h/v/Camera3D"]
+transform = Transform3D(10, -2.27374e-13, 8.52651e-14, -1.13687e-13, 10, 0, -2.84217e-14, 0, 10, 6.5373e-07, -0.608417, -7.47779)
+mesh = SubResource("QuadMesh_bow8b")
+surface_material_override/0 = SubResource("ShaderMaterial_jdde8")

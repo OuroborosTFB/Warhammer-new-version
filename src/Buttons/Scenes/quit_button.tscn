@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://byh7a30i6nfrf"]
+
+[ext_resource type="Script" path="res://Scripts/Buttons/quit_button.gd" id="1_1aw5e"]
+
+[node name="QuitButton" type="Button"]
+text = "Выйти"
+script = ExtResource("1_1aw5e")
+
+[connection signal="button_up" from="." to="." method="_on_button_up"]

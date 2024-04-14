@@ -1,5 +1,12 @@
 res://Character/Scene
+res://Scripts/Buttons
+res://src/Buttons/Scenes
 res://Scene
+res://src/Shaders
+res://src/Fonts
+res://src/UI/Scene
+res://Scripts/UI
+res://src/Theme
 res://Scripts
 res://Scripts/Character
 res://Character/Animation
