@@ -16,8 +16,6 @@ shader_parameter/addDepth = false
 [node name="Camroot" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.42269, 0, 0)
 script = ExtResource("1_jtnqr")
-h_acceleration = 3.0
-v_acceleration = 2.0
 
 [node name="h" type="Node3D" parent="."]
 

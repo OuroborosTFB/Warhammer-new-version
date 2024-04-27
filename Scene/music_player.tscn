@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://cmipkrve6b1qb"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer"]
+process_mode = 3

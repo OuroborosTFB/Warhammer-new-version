@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c801ijt87dbme"
+path="res://.godot/imported/песчаный уровень.mp3-8b7bbfb77cd0a3d4f2f644e4948d0e35.mp3str"
+
+[deps]
+
+source_file="res://src/Audio/песчаный уровень.mp3"
+dest_files=["res://.godot/imported/песчаный уровень.mp3-8b7bbfb77cd0a3d4f2f644e4948d0e35.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

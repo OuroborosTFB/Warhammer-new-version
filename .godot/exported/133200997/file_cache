@@ -1,0 +1,16 @@
+res://Character/Scene/camroot.tscn::be2398124a5bb7e0fd5cabf41420c33c::1713259123::res://.godot/exported/133200997/export-2a8c2c138b30c34c98a957cd6dbd5595-camroot.scn
+res://Character/Scene/character.tscn::eaa3b3603e580b60a5469eecd1e77b7b::1713532595::res://.godot/exported/133200997/export-53172dfd9fd5fbc110178c41543cdbd1-character.scn
+res://Scene/LevelTemplate.tscn::92cc83fa661abc498e3c2aed66319ce7::1713532598::res://.godot/exported/133200997/export-7fac68702aac9b0b0052d3cb98b4e54a-LevelTemplate.scn
+res://Scene/main_scene.tscn::7a54321d85aa057c0311c290b811cad7::1713532476::res://.godot/exported/133200997/export-aa8fc381011c112b83e9e35451cd3484-main_scene.scn
+res://Scene/main_screen.tscn::79abc4fb601dcbc15eef0f87622466fd::1713259122::res://.godot/exported/133200997/export-58dd88edf1b4ee737856ceb1bb8e3776-main_screen.scn
+res://src/Buttons/Scenes/back_button.tscn::45441222bc609736c675e94f2142bbd8::1713259123::res://.godot/exported/133200997/export-c31246205275d459a7834406a22879f2-back_button.scn
+res://src/Buttons/Scenes/change_scene_button.tscn::37271317fc5f136a7303adb0ff30bb66::1713259122::res://.godot/exported/133200997/export-920eb9214972f0c594b784a9a7e3e9d5-change_scene_button.scn
+res://src/Buttons/Scenes/change_skin_button.tscn::75966309277e7686294286c18bbbd481::1713343760::res://.godot/exported/133200997/export-4ccc860a93cebeea02a7707fa485d82b-change_skin_button.scn
+res://src/Buttons/Scenes/quit_button.tscn::6ca7c67bc0666ce0ac7302bb9e7b5a8e::1713259122::res://.godot/exported/133200997/export-3675823a0d49c7d7446addc54c252984-quit_button.scn
+res://src/Theme/button_hovertres.tres::cca348a7d5e0da06dcd7a27dbb45b440::1713255953::res://.godot/exported/133200997/export-f8db1a6788cd41cff89631afd689c53a-button_hovertres.res
+res://src/Theme/button_normal.tres::8b5ca2e8955fe952a195f8903e88ceb2::1713255714::res://.godot/exported/133200997/export-ed81debd2bd2d20ddfd102661f4ce6e5-button_normal.res
+res://src/Theme/button_pressed.tres::4ca96e3d0a24bd810cc384c3f523352e::1713255714::res://.godot/exported/133200997/export-5302d95cc25e95ac6baad318b49d38fc-button_pressed.res
+res://src/Theme/UI_theme.tres::c485d5381531408ac2a2617e13c8e354::1713530818::res://.godot/exported/133200997/export-4f9b918450a17a1438f683ffbd9588af-UI_theme.res
+res://src/UI/Scene/title.tscn::80639c912f5d00fb215633408a18afe1::1713259123::res://.godot/exported/133200997/export-7ef1dde71cdc7bd0f60d57fcc04e488f-title.scn
+res://src/UI/Scene/ui.tscn::7b88d0d2405ebc4cecb7b21c8dba55a0::1713343760::res://.godot/exported/133200997/export-cf402b0364c0365f4b1ee64719391a53-ui.scn
+res://Scene/music_player.tscn::f92c647da19b654499143acd1e177bef::1713532476::res://.godot/exported/133200997/export-98120548ad7d68045d8a960cded978ee-music_player.scn
